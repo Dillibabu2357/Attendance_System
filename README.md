@@ -21,19 +21,37 @@ contact them.
 versa.
 
 ## Installation
-### 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Dillibabu2357/Attendance_System/new/main?filename=README.md
-   ```
+### 1.Go to the directory
+```bash
+cd attendance_system
+```
 
-### 2.Install Dependencies:
+### 2.Create virtual Environment:
+```bash
+python -m venv venv
+```
+
+ ### 3.Activate:
+ ```bash
+venv\Scripts\activate
+```
+### 4.Clone the Repository:
+   ```bash
+   git clone https://github.com/Dillibabu2357/Attendance_System.git
+   ```
+### 5.change directory:
+```bash
+cd Attendance_system
+```
+
+### 6.Install Dependencies:
 ***Install Django:*** First, you need to install Django using pip. Make sure you have Python installed on your system.
 
 ```bash
 pip install django
 ```
 
-### 3.Run migrations:
+### 7.Run migrations:
 ```bash
 python manage.py makemigrations
 ```
@@ -42,22 +60,23 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 4.Create a superuser account:
+### 8.Create a superuser account:
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### 5. To run the development server:
-
+### 9. Run the surver:
 ```bash
 python manage.py runserver
 ```
 
-### 6.API Documentation
+### 10.Admin-panel found at:
+```bash
+ http://127.0.0.1:8000/admin/
+```
 
-Starting development server at http://127.0.0.1:8000/
-
+Flow chart
 
              +--------------+           +--------------+
              |    Student   |           |   Teacher    |
