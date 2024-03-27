@@ -22,7 +22,9 @@ versa.
 
 ## Installation
 ### 1. Clone the repository:
+   ```bash
    git clone https://github.com/Dillibabu2357/Attendance_System/new/main?filename=README.md
+   ```
 
 ### 2.Install Dependencies:
 ***Install Django:*** First, you need to install Django using pip. Make sure you have Python installed on your system.
