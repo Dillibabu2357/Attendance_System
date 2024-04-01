@@ -75,7 +75,8 @@ python manage.py runserver
 ### 10.To Run the Unit-tests:
 
 ```bash
- python manage.py test -v 2    ```
+ python manage.py test -v 2
+```
 
 
 
