@@ -72,34 +72,10 @@ python manage.py runserver
  http://127.0.0.1:8000/admin/
 ```
 
-Flow chart
+### 10.To Run the Unit-tests:
 
-             +--------------+           +--------------+
-             |    Student   |           |   Teacher    |
-             +--------------+           +--------------+
-             | - roll_no    |           | - id         |
-             | - name       |           | - name       |
-             | - class      |           | - subject    |
-             +--------------+           +--------------+
-                   |                          |
-                   |                          |
-                   |  +--------------+        |
-                   |  |  Attendance  |        |
-                   |  +--------------+        |
-                   |  | - student    |<--------+
-                   |  | - date       |
-                   |  | - status     |
-                   |  +--------------+
-                   |         |
-                   |         |
-                   |  +--------------+
-                   +--|    Marks     |
-                      +--------------+
-                      | - name       |
-                      | - teacher    |
-                      +--------------+
+```bash
+ python manage.py test -v 2    ```
 
-    
-     
 
 
