@@ -1,4 +1,5 @@
-from django.db import models             #imported models form django.db
+from django.db import models            
+# imported models form django.db
 
 
 class Attendance(models.Model):
