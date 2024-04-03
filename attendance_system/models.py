@@ -1,55 +1,61 @@
-from django.db import models            
-# imported models form django.db
-
-
-class Attendance(models.Model):
-    student_name=models.CharField(max_length=30) 
-    day=models.DateField() 
-    percentage=models.FloatField()
-    subject=models.CharField(max_length=20) 
-    roll_no=models.IntegerField() 
-
-    def __str__(self) -> str:
-         return f"{self.student_name} --- {self.percentage}"
-
-
-class Meta:
-        unique_together = ('stud_name', 'subject')
+from django.db import models
 
 class Teacher(models.Model):
-    name=models.CharField(max_length=30)
-    subject=models.CharField(max_length=20) 
-    period=models.IntegerField() 
-    cls=models.CharField(max_length=20) 
-    id=models.IntegerField(primary_key=True)
+    teacher_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=45)
+    last_name = models.CharField(max_length=45)
+    email = models.EmailField(max_length=45)
+    phone_no = models.IntegerField()
+    experience = models.IntegerField()
 
-    def __str__(self) -> str:
-         return f"{self.name} --- {self.subject}"
-    
+    def _str_(self):
+        return f"{self.first_name} {self.last_name}"
 
-    # def __str__(self) -> str:
-    #      return f"{self.subject} && {self.marks}"
+class Students(models.Model):
+    roll_no = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=45)
+    last_name = models.CharField(max_length=45)
+    phone_no = models.BigIntegerField()  # Changed to BigIntegerField to handle larger numbers
+    gender = models.CharField(max_length=45)
+    email = models.EmailField(max_length=45)
+    class_field = models.IntegerField()  # Changed to class_field to avoid conflict with Python keyword
 
+    def _str_(self):
+        return f"{self.first_name} {self.last_name}"
 
-class Meta:
-    unique_together = ('stud_name', 'subject')
+class Subject(models.Model):
+    subject_id = models.AutoField(primary_key=True)
+    subject_name = models.CharField(max_length=45)
 
-# student table  
-class Student(models.Model):              #table_name is Student, by using class keyword we can create table
-    roll_no=models.AutoField(primary_key=True)           # roll_no column is unique,so it is primary key 
-    attend_percent=models.IntegerField() 
-    subject=models.CharField(max_length=20) 
-    name=models.CharField(max_length=30)
+    def _str_(self):
+        return self.subject_name
 
-    def __str__(self) -> str:
-         return f"{self.name} --- {self.subject}"
-    
+class Teacher_has_Subject(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (('teacher', 'subject'),)
+
+    def _str_(self):
+        return f"{self.teacher.first_name} {self.teacher.last_name} - {self.subject.subject_name}"
+
+class Attendance(models.Model):
+    id = models.AutoField(primary_key=True)
+    student = models.ForeignKey(Students, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    attendance_date = models.DateField()
+    status = models.CharField(max_length=10)
+
+    def _str_(self):
+        return f"{self.student.first_name} {self.student.last_name} - {self.subject.subject_name} - {self.attendance_date}"
 
 class Marks(models.Model):
-    student_rn=models.ForeignKey(Student, on_delete=models.CASCADE)
-    subject=models.CharField(max_length=20) 
-    marks=models.IntegerField() 
-    teacher_id=models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True)
+    marks = models.IntegerField()
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    student = models.ForeignKey(Students, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
-    def __str__(self) -> str:
-         return f"{self.student_rn} --- {self.marks}"
+    def _str_(self):
+        return f"{self.student.first_name} {self.student.last_name} - {self.subject.subject_name} - {self.marks}"
